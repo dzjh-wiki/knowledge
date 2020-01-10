@@ -1,0 +1,29 @@
+{
+	"title" : "JDreamHeart-Gitbook",
+	"author" : "梦心DH",
+	"description" : "知识汇总",
+	"language" : "zh-hans",
+	"links" : {
+		"sidebar" : {
+			"Home" : "https://jdreamheart.com"
+		}
+	},
+	"plugins" : ["favicon", "expandable-chapters", "splitter", "github", "hide-element", "back-to-top-button", "katex"],
+	"pluginsConfig" : {
+		"favicon": {
+			"shortcut": "dzjh.ico",
+            "bookmark": "dzjh.ico",
+            "appleTouch": "dzjh.ico",
+            "appleTouchMore": {
+                "120x120": "dzjh.ico",
+                "180x180": "dzjh.ico"
+            }
+		},
+		"github": {
+			"url": "https://github.com/dzjh-wiki/knowledge"
+		},
+		"hide-element": {
+			"elements": [".gitbook-link"]
+		}
+	}
+}
