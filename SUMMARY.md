@@ -23,7 +23,10 @@
 * [数学知识](math/README.md)
     * [高等数学](math/advanced_mathematics/README.md)
         * [公式汇总](math/advanced_mathematics/formula_summary.md)
-        * [定理汇总](math/advanced_mathematics/theorems_summary.md)
+        * [定理汇总](math/advanced_mathematics/theorems_summary/README.md)
+            * [函数与极限](math/advanced_mathematics/theorems_summary/func_and_limits.md)
+            * [导数与微分](math/advanced_mathematics/theorems_summary/derivatives_and_differentials.md)
+            * [微分中值定理与导数的应用](math/advanced_mathematics/theorems_summary/application_of_dmt_and_derivative.md)
     * [向量恒等式列表](math/vector_identity_list.md)
     * [观察空间到裁剪空间的投影矩阵推导](math/model_2_clip_projection_matrix/README.md)
     

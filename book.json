@@ -8,7 +8,7 @@
 			"Home" : "https://jdreamheart.com"
 		}
 	},
-	"plugins" : ["favicon", "expandable-chapters", "splitter", "github", "hide-element", "back-to-top-button", "katex"],
+	"plugins" : ["favicon", "expandable-chapters", "splitter", "github", "hide-element", "back-to-top-button", "mathjax"],
 	"pluginsConfig" : {
 		"favicon": {
 			"shortcut": "dzjh.ico",
