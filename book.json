@@ -1,11 +1,11 @@
 {
-	"title" : "JDreamHeart-Gitbook",
+	"title" : "JDreamHeart-知识汇总",
 	"author" : "梦心DH",
 	"description" : "知识汇总",
 	"language" : "zh-hans",
 	"links" : {
 		"sidebar" : {
-			"Home" : "https://jdreamheart.com"
+			"Home" : "https://jdreamheart.com/wiki"
 		}
 	},
 	"plugins" : ["favicon", "expandable-chapters", "splitter", "github", "hide-element", "back-to-top-button", "mathjax"],
