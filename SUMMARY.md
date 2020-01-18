@@ -18,6 +18,9 @@
     * [从输入Url到页面渲染](coding/urlrender/README.md)
     * [领域驱动设计（DDD）](coding/domain_driven_design/README.md)
         * [统一建模语言（UML）](coding/domain_driven_design/uml.md)
+        * [事件溯源（Event Sourcing）](coding/domain_driven_design/event_sourcing.md)
+        * [命令查询职责分离模式（CQRS）](coding/domain_driven_design/cqrs.md)
+        * [Soga](coding/domain_driven_design/soga.md)
 
 -----
 * [数学知识](math/README.md)
