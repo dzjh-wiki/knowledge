@@ -36,6 +36,7 @@
 -----
 * [物理知识](physics/README.md)
     * [基础物理](physics/basic_physics/README.md)
+        * [经典物理方程式](physics/basic_physics/classical_physics.md)
         * [麦克斯韦方程组](physics/basic_physics/maxwell_equations.md)
         
 -----
