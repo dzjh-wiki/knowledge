@@ -4,6 +4,7 @@
 
 -----
 * [编程知识](coding/README.md)
+    * [算法复杂度](coding/algorithm_complexity.md)
     * [编程笔记](coding/coding_notes.md)
     * [编程风格](coding/coding_style.md)
     * [python语言](coding/python/README.md)
