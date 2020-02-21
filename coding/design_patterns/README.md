@@ -14,6 +14,7 @@
   * 多用组合，少用继承
   * 针对接口编程，不针对实现编程
   * 为交互对象之间的松耦合设计而努力
+  * 对扩展开放，对修改关闭
 
 ## 1. 策略模式
 定义算法族，分别封装起来，让它们之间可以相互替换，此模式让算法的变化独立于使用算法的客户。
@@ -81,3 +82,65 @@ public class TestData : Subject {
     }
 }
 ```
+
+
+## 3. 装饰者模式
+动态地将责任附加到对象上。想要扩展功能，装饰者提供有别于继承的另一种选择。
+
+```csharp
+// 基础类
+public abstract class BaseObj {
+    protected string desc = "base";
+
+    public virtual string getDeac() {
+        return desc;
+    }
+    
+    public abstract int getID();
+}
+
+// 测试类
+public class TestObj : BaseObj {
+    public TestObj() {
+        desc = "test"; 
+    }
+
+    public override int getID() {
+        return 233;
+    }
+}
+
+// 修饰实现类
+public class DecorateTestObj : BaseObj {
+    private BaseObj baseObj;
+
+    public DecorateTestObj(BaseObj baseObj) {
+        this.baseObj = baseObj; 
+    }
+
+    public override string getDeac() {
+        return "Decorate[" + baseObj.getDeac() + "]";
+    }
+
+    public override int getID() {
+        return baseObj.getID() * 10;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        TestObj testObj = new TestObj();
+        Console.WriteLine("Desc: {0}, ID: {1}.", testObj.getDeac(), testObj.getID());
+
+        // 进行装饰
+        DecorateTestObj newTestObj = new DecorateTestObj(testObj);
+        Console.WriteLine("Desc: {0}, ID: {1}.", newTestObj.getDeac(), newTestObj.getID());
+        Console.ReadLine();
+    }
+}
+```
+
+
+## 4. 工厂模式
