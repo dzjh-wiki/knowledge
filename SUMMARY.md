@@ -32,6 +32,8 @@
             * [函数与极限](math/advanced_mathematics/theorems_summary/func_and_limits.md)
             * [导数与微分](math/advanced_mathematics/theorems_summary/derivatives_and_differentials.md)
             * [微分中值定理与导数的应用](math/advanced_mathematics/theorems_summary/application_of_dmt_and_derivative.md)
+    * [矩阵与空间坐标系变换](./math/matrix_and_scs_transformation/README.md)
+        * [通过代码实现矩阵类](./math/matrix_and_scs_transformation/matrix_py_impl.md)
     * [向量恒等式列表](math/vector_identity_list.md)
     * [观察空间到裁剪空间的投影矩阵推导](math/model_2_clip_projection_matrix/README.md)
     
