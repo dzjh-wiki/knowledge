@@ -11,7 +11,7 @@
   * 协程是在主线程中去执行的。协程**不是线程(大概是因为机制不一样才这么说的吧)**，也不是异步执行的。协程和MonoBehaviour的Update函数一样也是在MainThread中执行的。使用协程你不用考虑同步和锁的问题。
   * 协程其实就是一个IEnumerator（迭代器），IEnumerator 接口有两个方法 Current 和 MoveNext() ，只有当MoveNext()返回true时才可以访问Current，否则会报错。迭代器方法运行到 yield return 语句时，会返回一个expression表达式并保留当前在代码中的位置。 当下次调用迭代器函数时执行从该位置重新启动。
   * Unity在每帧做的工作就是：调用协程（迭代器）MoveNext() 方法，如果返回 true ，就从当前位置继续往下执行。
-  * 协程跟Update()其实一样的，都是Unity每帧对会去处理的函数（如果有的话）。如果MonoBehaviour 是处于激活（active）状态的而且yield的条件满足，就会执行协程方法的后面代码。
+  * 协程跟Update()其实一样的，都是Unity每帧对会去处理的函数（如果有的话）【先执行Update，然后执行协程】。如果MonoBehaviour 是处于激活（active）状态的而且yield的条件满足，就会执行协程方法的后面代码。
 
 ### 1.1 协程与线程的区别
   * 协同程序（coroutine）与多线程情况下的线程比较类似：有自己的堆栈，自己的局部变量，有自己的指令指针（IP，instruction pointer），但与其它协同程序共享全局变量等很多信息。
