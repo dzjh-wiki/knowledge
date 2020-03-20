@@ -39,3 +39,21 @@ Github链接：[https://github.com/JDreamHeart/DailyCodes/csharp/LeetCode/Soluti
   * (4)然后从(2)重新开始，直到其中一个数组没有元素或只有一个元素；
   * (5)当其中一个数组中没有元素时，返回另一个数组的中位数即可；
   * (6)当其中一个数组中只有一个元素时，则依次比较另一个数组的头尾数值（大于头部，则去除头部；小于尾部，则去除尾部），当其中一个数组没有元素时，返回另一个数组的中位数即可；
+  
+Github链接：[https://github.com/JDreamHeart/DailyCodes/csharp/LeetCode/Solution7.cs](https://github.com/JDreamHeart/DailyCodes/tree/master/csharp/LeetCode/Solution7.cs)
+
+## 正则表达式匹配
+```csharp
+// 给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。
+
+// '.' 匹配任意单个字符
+// '*' 匹配零个或多个前面的那一个元素
+// 所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。
+
+// 说明:
+
+// s 可能为空，且只包含从 a-z 的小写字母。
+// p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。
+```
+思路：
+  * 
