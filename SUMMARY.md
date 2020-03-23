@@ -23,6 +23,8 @@
         * [命令查询职责分离模式（CQRS）](coding/domain_driven_design/cqrs.md)
         * [Soga](coding/domain_driven_design/soga.md)
     * [设计模式](coding/design_patterns/README.md)
+    * [LeetCode题解合集](coding/leetcode/README.md)
+    * [模式匹配算法](coding/pattern_matching_algorithm/README.md)
 
 -----
 * [数学知识](math/README.md)

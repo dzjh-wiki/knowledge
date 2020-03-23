@@ -180,3 +180,55 @@ int movebyGs(int bcIdx, int pLen, int[]suffix, bool[] prefix) {
     return pLen;
 }
 ```
+
+
+## Sunday 算法
+**算法思想：**
+Sunday算法是一个线性字符串模式匹配算法。在匹配过程中，模式串并不被要求一定要按从左向右进行比较还是从右向左进行比较，它在发现不匹配时，算法能跳过尽可能多的字符以进行下一步的匹配，从而提高了匹配效率。 
+
+Sunday算法的基本流程: 设字符串S，模式串为P，长度分别为n和m。首先对P进行预处理：记录P中每一种字符最后出现的位置，将其存入一个数组（假设为move）中。  
+
+**算法实现**
+Sunday算法是从前往后匹配，在匹配失败时关注的是主串中参加匹配的最末位字符的下一位字符。
+  * 如果该字符没有在模式串中出现则直接跳过，即移动位数 = 模式串长度 + 1；
+  * 否则，其移动位数 = 模式串长度 - 该字符最右出现的位置(以0开始) = 模式串中该字符最右出现的位置到尾部的距离 + 1。
+
+文字描述过程：
+  * 假设在发生不匹配时S[i]≠P[j]，1≤i≤n，1≤j≤m。设S此次第一个匹配的字符位置为l。显然，S[l+m]肯定要参加下一轮的匹配，并且P至少要与S[l+m]匹配才有可能与整个S匹配。
+  * 这时我们就寻找P中S[l+m]出现的位置了。利用我们预处理好的数组move，可以O(1)算法复杂度查找出那个位置u，并将其直接移动至P[u]==S[l+m]。
+  *  特殊地，若S[l+m]没有在P中出现，那么P不可能会与S[l+m]匹配，则将P的第一位直接移动到S[l+m+1]，继续匹配。直至l+m>n时，匹配完毕。
+
+代码实现：
+```csharp
+// 构建move数组
+Dictionary<char, int> buildMove(string p) {
+    Dictionary<char, int> ret = new Dictionary<char, int>();
+    for (int i = 0; i < p.Length; i++) {
+        ret[p[i]] = p.Length - i;
+    }
+    return ret;
+}
+int sundy(string s, string p) {
+    Dictionary<char, int> move = buildMove(p);
+    int l = 0, j = 0; // S每次第一个匹配的字符位置，以及模式串已匹配了的长度
+    while (l < s.Length - p.Length) {
+        j = 0;
+        while (s[l+j] == p[j]) {
+            j++;
+            if (j >= p.Length) {
+                return l;
+            }
+        }
+        if (move.ContainsKey(s[l+p.Length])) {
+            l += move[s[l+p.Length]];
+        } else {
+            l += p.Length + 1;
+        }
+
+    }
+    return -1;
+}
+```
+
+**时间复杂度**
+若模式串使得move中对应的值为1，即每次匹配失败时，只让模式串向后移动一位再进行匹配。这样会让Sunday算法的时间复杂度飙升到了O(m*n)，亦即字符串匹配的最坏情况。
