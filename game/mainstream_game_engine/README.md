@@ -65,7 +65,6 @@
 ## Decima
 开发商：Guerrilla Games
 开发语言：C++
-最新版本：未知
 代表作：《地平线 零之曙光》、《死亡搁浅》
 
 ## Naughty Dog Game Engine（顽皮狗）
@@ -75,7 +74,7 @@
 ## ID Tech引擎(由雷神之锤引擎发展而来)
 开发商：id Software
 开发语言：C++
-最新版本：id Tech 5
+最新版本：id Tech 7
 代表作：《雷神之锤》系列、《毁灭战士》系列、《德军总部》系列、《狂怒》
 
 ## EGO引擎(Neon引擎的修改版本)
