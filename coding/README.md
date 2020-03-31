@@ -25,3 +25,4 @@
   * [设计模式](design_patterns/README.md)
   * [LeetCode题解合集](leetcode/README.md)
   * [模式匹配算法](pattern_matching_algorithm/README.md)
+  * [动态规划算法](dynamic_rogramming_algorithm/README.md)

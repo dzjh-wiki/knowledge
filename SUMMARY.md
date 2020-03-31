@@ -38,6 +38,8 @@
         * [通过代码实现矩阵类](./math/matrix_and_scs_transformation/matrix_py_impl.md)
     * [向量恒等式列表](math/vector_identity_list.md)
     * [观察空间到裁剪空间的投影矩阵推导](math/model_2_clip_projection_matrix/README.md)
+    * [贝塞尔曲线](./math/bezier_curve/README.md)
+        * [贝塞尔曲线的代码实现](./math/bezier_curve/bezier_curve_code_impl.md)
     
 -----
 * [物理知识](physics/README.md)
