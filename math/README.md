@@ -10,3 +10,4 @@
   * [观察空间到裁剪空间的投影矩阵推导](./model_2_clip_projection_matrix/README.md)
   * [贝塞尔曲线](./bezier_curve/README.md)
     * [贝塞尔曲线的代码实现](./bezier_curve/bezier_curve_code_impl.md)
+  * [常用算法合集](./common_algorithms/README.md)
