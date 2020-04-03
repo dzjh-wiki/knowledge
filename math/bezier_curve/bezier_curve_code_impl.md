@@ -147,10 +147,10 @@ public Vector3[] GetEasingPosList(int count, Vector3 startPos, Vector3 endPos, s
 
 ```
 
-在Unity上显示以上定义的缓动效果：
-**制作一个缓动组件**
+## 在Unity上显示以上定义的缓动效果
+
+**制作一个Ease缓动组件**
 参数解释：
-  * 枚举缓动类型
   * 枚举缓动平面
   * 缓动时长
   * 开始位置
@@ -160,6 +160,11 @@ public Vector3[] GetEasingPosList(int count, Vector3 startPos, Vector3 endPos, s
   * 在场景中创建一个主角游戏体（如球体或立方体），以及两个用作开始和结束位置的空游戏体。
   * 给主角游戏体添加缓动组件，调整组件参数。
   * 运行场景，以查看运行结果。
+
+【运行结果的Gif图】
+
+### DoTween插件
+为了避免重复造轮子，可以直接使用Unity中已成熟的插件DoTween，该插件不仅包含了常用贝塞尔曲线的相关功能，还包括了封装好的动画效果及逻辑。
 
 
 ## 完整代码
