@@ -86,7 +86,7 @@ public Vector3 Bezier(float t, List<Vector3> pList) {
   * easeOutBack -> (0.175, 0.885), (0.32, 1.275);
   * easeInOutBack -> (0.68, -0.55), (0.265, 1.55);
 
-**欲查看对应以上贝塞尔曲线参数的动画效果，可以参考网页【[www.jdreamheart.com/bezier-anim](www.jdreamheart.com/bezier-anim)】。**
+**欲查看对应以上贝塞尔曲线参数的动画效果，可以参考网页【[jdreamheart.com/tech/bezier_anim.html](https://jdreamheart.com/tech/bezier_anim.html)】。**
 
 
 ## 在Unity上显示物体的缓动效果
