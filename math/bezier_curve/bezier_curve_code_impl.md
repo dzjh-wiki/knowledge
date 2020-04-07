@@ -86,14 +86,17 @@ public Vector3 Bezier(float t, List<Vector3> pList) {
   * easeOutBack -> (0.175, 0.885), (0.32, 1.275);
   * easeInOutBack -> (0.68, -0.55), (0.265, 1.55);
 
+**欲查看对应以上贝塞尔曲线参数的动画效果，可以参考网页【[www.jdreamheart.com/bezier-anim](www.jdreamheart.com/bezier-anim)】。**
+
+
+## 在Unity上显示物体的缓动效果
+
+主要代码如下：
 ```csharp
 // 初始化配置
 Dictionary<string, float[]> easingConfig = new Dictionary<string, float[]>();
 easingConfig.Add("linear", new float[]{0, 0, 1, 1});
 easingConfig.Add("ease", new float[]{0.25f, 0.1f, 0.25f, 1});
-easingConfig.Add("ease-in", new float[]{0.42f, 0, 1, 1});
-easingConfig.Add("ease-out", new float[]{0, 0, 0.58f, 1});
-easingConfig.Add("ease-in-out", new float[]{0.42f, 0, 0.58f, 1});
 // ... 其他类型
 
 
@@ -147,8 +150,6 @@ public Vector3[] GetEasingPosList(int count, Vector3 startPos, Vector3 endPos, s
 
 ```
 
-## 在Unity上显示以上定义的缓动效果
-
 **制作一个Ease缓动组件**
 参数解释：
   * 枚举缓动平面
@@ -164,7 +165,7 @@ public Vector3[] GetEasingPosList(int count, Vector3 startPos, Vector3 endPos, s
 【运行结果的Gif图】
 
 ### DoTween插件
-为了避免重复造轮子，可以直接使用Unity中已成熟的插件DoTween，该插件不仅包含了常用贝塞尔曲线的相关功能，还包括了封装好的动画效果及逻辑。
+为了避免重复造轮子，可以直接使用Unity的插件DoTween，该插件包含了常用的动画功能，包括允许使用贝塞尔曲线参数来显示相应的动画效果。
 
 
 ## 完整代码
