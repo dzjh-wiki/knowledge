@@ -3,7 +3,7 @@
 ----
 欲了解贝塞尔曲线的相关概念，请参考[贝塞尔曲线](./README.md)。  
 
-本篇文章主要介绍如何通过代码实现贝塞尔曲线，以及介绍常用缓动效果的3阶贝塞尔曲线参数和函数设计，最后展示部分在Unity上显示的缓动效果。
+本篇文章主要介绍如何通过代码实现贝塞尔曲线，以及介绍常用缓动效果的3阶贝塞尔曲线参数和函数设计，最后在Unity上展示部分缓动效果。
 
 ## 两种方式实现n阶贝塞尔曲线
 （注：以下的Vector2是Unity游戏引擎所定义的2维向量类型）  
@@ -43,10 +43,10 @@ public Vector2 Bezier(float t, List<Vector2> pList) {
         return pList[0];
     }
     Vector2 result = Vector2.zero;
-    int n = pList.Count;
-    for (int i = 0; i < pList.Count; i++) {
-        int coefficient = Factorial(n) / (Factorial(i) * Factorial(n - i));
-        result += coefficient * pList[i] * (1-t)^(n-i) * t^i;
+    int n = pList.Count - 1;
+    for (int i = 0; i <= n; i++) {
+        float coefficient = (float)Factorial(n) / (float)(Factorial(i) * Factorial(n - i));
+        result += coefficient * pList[i] * Mathf.Pow(1-t, n-i) * Mathf.Pow(t, i);
     }
     return result;
 }
@@ -54,22 +54,24 @@ public Vector2 Bezier(float t, List<Vector2> pList) {
 
 
 ## 如何将贝塞尔曲线运用到缓动效果中
-从以上的贝塞尔函数可以看出，在确定了定位点位置之后，函数传入的不同`t`值，对应了贝塞尔曲线中的某点坐标`(x, y)`。  
+从以上的贝塞尔函数可以看出，在确定了定位点位置之后，函数传入的不同`t`值，得到对应贝塞尔曲线中的某点坐标`(x, y)`。  
 
 在实际应用中，一般使用3阶贝塞尔曲线来模拟缓动效果，如下图所示，4个点确定了一条贝塞尔曲线。
 
 ![3阶贝塞尔曲线例子](./img/bezier_curve_3_example.png)
 
-然而，通过上图可以发现，贝塞尔曲线的横轴表示的`距离动画开始的时间差与动画总时间的比值`，纵轴表示`缓动效果的进度`。
-一般情况下，在某一帧中，我们只知道`距离动画开始的时间差与动画总时间`，这时需要知道`缓动效果的进度`来确定动画对象在当前帧的状态。  
+通过上图可以发现，在模拟缓动效果​时，贝塞尔曲线的横轴表示的`距离动画开始的时间差与动画总时间的比值`，纵轴表示`缓动效果的进度`。
+一般情况下，在某一帧中，我们只知道`距离动画开始的时间差与动画总时间`，这时需要求得`缓动效果的进度`，来确定动画对象在当前帧的状态。  
 
-不幸的是，在上面贝塞尔函数的代码实现中，我们只能通过`t`（注意这个`t`不是时间），来确定贝塞尔曲线的横坐标`x`和纵坐标`y`。  
+然而不幸的是，在上面贝塞尔函数的代码实现中，我们只能通过`t`（注意这个`t`不是时间），来确定贝塞尔曲线的横坐标`x`和纵坐标`y`。  
 
 而实际需求是：要通过贝塞尔曲线的横坐标`x`来确定其纵坐标`y`。
 
-#### 如何通过x求y
-##### 二分法逼近x值
-采用二分法，让`t`值从`1`开始，每次循环只变化当前`t`值的二分之一，然后计算出当前的`x`值，直到当前的`x`值逼近理想值（误差系数可自行调整）。  
+#### 那么该如何通过x求y呢？
+一种较为简单的方法就是：通过**二分法逼近x值**。
+​
+
+这里的二分对象是`t`：让`t`值从`1`开始，每次循环只变化二分之一，然后计算出每次循环的`x`值，直到该`x`值逼近理想值（即达到误差系数允许的范围），即可得到相应的`y`值。
 
 主要代码如下：  
 ```csharp
@@ -98,15 +100,23 @@ public float GetProgressVal(float x, EasingType easingType, float err = 0.01f) {
     pList.Add(new Vector2(easingCfg[0], easingCfg[1]));
     pList.Add(new Vector2(easingCfg[2], easingCfg[3]));
     pList.Add(new Vector2(1, 1));
-    float bPos = Vector2.zero;, t = 1;
+    Vector2 bPos = Vector2.one;
+    float t = 1, mid = 1;
     err = Mathf.Max(err, 0);
+    int limit = 10000; // 避免函数死循环
     while (Mathf.Abs(bPos.x - x) > err) {
+        mid = mid/2f;
         if (bPos.x > x) {
-            t -= t/2f;
+            t -= mid;
         } else {
-            t += t/2f;
+            t += mid;
         }
         bPos = Bezier(t, pList);
+        limit--;
+        if (limit < 0) {
+            print("GetProgressVal break!");
+            break;
+        }
     }
     return bPos.y;
 }
@@ -150,23 +160,142 @@ public float GetProgressVal(float x, EasingType easingType, float err = 0.01f) {
 **欲查看对应以上贝塞尔曲线参数的动画效果，可以参考网页【[jdreamheart.com/tech/bezier_anim.html](https://jdreamheart.com/tech/bezier_anim.html)】。**
 
 
-**制作一个Ease缓动组件**
-参数解释：
-  * 枚举缓动平面
+### 基于Unity制作一个缓动组件EaseEffect
+**所需参数：**  
   * 缓动时长
+  * 缓动类型
   * 开始位置
   * 结束位置
 
-编辑器操作：
+**编辑器操作：**
   * 在场景中创建一个主角游戏体（如球体或立方体），以及两个用作开始和结束位置的空游戏体。
-  * 给主角游戏体添加缓动组件，调整组件参数。
+  * 给主角游戏体添加缓动组件，调整组件参数（如持续时间）。
   * 运行场景，以查看运行结果。
 
-【运行结果的Gif图】
+![运行结果的Gif图](./img/unity_ease_effect.gif)
 
 ### DoTween插件
-为了避免重复造轮子，可以直接使用Unity的插件DoTween，该插件包含了常用的动画功能，包括允许使用贝塞尔曲线参数来显示相应的动画效果。
+为了避免重复造轮子，可以直接使用`Unity`的插件`DoTween`，该插件包含了常用的动画功能，包括允许使用贝塞尔曲线参数来显示相应的动画效果。
 
 
 ## 完整代码
-GitHub地址：  
+以下是关于自制的缓动组件EaseEffect的源代码：
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum EasingType {
+    Linear,
+    Ease,
+}
+
+[AddComponentMenu("GameScripts/EaseEffect")]
+
+public class EaseEffect : MonoBehaviour
+{
+    Dictionary<EasingType, float[]> easingConfig = new Dictionary<EasingType, float[]>();
+
+    public float m_duration = 2;
+    float m_actualDuration;
+
+    public Transform m_startTrans;
+    public Transform m_endTrans;
+    Vector3 m_startPos;
+    Vector3 m_endPos;
+
+    void Awake() {
+        easingConfig.Add(EasingType.Linear, new float[]{0, 0, 1, 1});
+        easingConfig.Add(EasingType.Ease, new float[]{0.25f, 0.1f, 0.25f, 1f});
+        // todo: 添加其他类型的贝塞尔曲线参数
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        m_startPos = m_startTrans.position;
+        m_endPos = m_endTrans.position;
+        print(string.Format("EaseEffect Start: {0}, {1}", m_startPos, m_endPos));
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (m_duration <= 0 || m_actualDuration > m_duration) {
+            return;
+        }
+        m_actualDuration += Time.deltaTime;
+        float rate = GetProgressVal(m_actualDuration/m_duration, EasingType.Ease);
+        print(string.Format("EaseEffect Update Rate: {0}", rate));
+        Vector3 targetPos = m_startPos + (m_endPos - m_startPos) * rate;
+        this.transform.position = targetPos;
+    }
+
+    public void ResetActualDuration() {
+        m_actualDuration = 0;
+    }
+
+    // 获取阶乘结果
+    public int Factorial(int num) {
+        int result = 1;
+        for (int i = 1; i <= num; i++) {
+            result *= i;
+        }
+        return result;
+    }
+
+    public Vector2 Bezier(float t, List<Vector2> pList) {
+        if (pList.Count == 0) {
+            return Vector2.zero;
+        } else if (pList.Count < 2) {
+            return pList[0];
+        }
+        // 使用一般定义式
+        Vector2 result = Vector2.zero;
+        int n = pList.Count - 1;
+        for (int i = 0; i <= n; i++) {
+            float coefficient = (float)Factorial(n) / (float)(Factorial(i) * Factorial(n - i));
+            result += coefficient * pList[i] * Mathf.Pow(1-t, n-i) * Mathf.Pow(t, i);
+        }
+        return result;
+        // 直接使用3阶定义式
+        // return Mathf.Pow(1-t, 3) * pList[0] + 3*t*Mathf.Pow(1-t, 2) * pList[1] + 3 * t * t *(1-t) * pList[2] + Mathf.Pow(t, 3) * pList[3];
+    }
+
+    
+    // 获取对应x的进度值
+    // @params x 理想值
+    // @params easingType 缓动类型
+    // @params err 误差系数
+    public float GetProgressVal(float x, EasingType easingType, float err = 0.01f) {
+        if (!easingConfig.ContainsKey(easingType)) {
+            return 0;
+        }
+        float[] easingCfg = easingConfig[easingType];
+        List<Vector2> pList = new List<Vector2>();
+        pList.Add(new Vector2(0, 0));
+        pList.Add(new Vector2(easingCfg[0], easingCfg[1]));
+        pList.Add(new Vector2(easingCfg[2], easingCfg[3]));
+        pList.Add(new Vector2(1, 1));
+        Vector2 bPos = Vector2.one;
+        float t = 1, mid = 1;
+        err = Mathf.Max(err, 0);
+        int limit = 10000; // 避免函数死循环
+        while (Mathf.Abs(bPos.x - x) > err) {
+            mid = mid/2f;
+            if (bPos.x > x) {
+                t -= mid;
+            } else {
+                t += mid;
+            }
+            bPos = Bezier(t, pList);
+            limit--;
+            if (limit < 0) {
+                print("GetProgressVal break!");
+                break;
+            }
+        }
+        return bPos.y;
+    }
+}
+```
