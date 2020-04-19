@@ -8,6 +8,11 @@
 主要内容：
 
   * [编程语言特性](coding_language_feature/README.md)
+    * [CSharp](coding_language_feature/csharp.md)
+    * [Go](coding_language_feature/golang.md)
+    * [Lua](coding_language_feature/lua.md)
+    * [Python](coding_language_feature/python.md)
+    * [JavaScript](coding_language_feature/javascript.md)
   * [算法复杂度](algorithm_complexity.md)
   * [编程笔记](coding_notes.md)
   * [编程风格](coding_style.md)
