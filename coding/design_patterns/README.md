@@ -169,4 +169,75 @@ public class Singleton {
 
 
 ## 5. 命令模式
-**命令模式**将“请求”封装成对象，以便使用不同的请求、队列或者日志来参数化其他对象。命令模式也支持可撤销的操作。
+**命令模式**将“请求”封装成对象，以便使用不同的请求、队列或者日志来参数化其他对象。命令模式也支持可撤销的操作。  
+```csharp
+public interface Command {
+    void execute();
+    void undo();
+}
+
+public class NoCommand : Command {
+    public execute() {}
+    public undo() {}
+}
+
+public class RemoteControlWithUndo {
+    Command[] onCommands;
+    Command[] offCommands;
+    Command undoCommand;
+
+    public int commandCount = 3;
+
+    public RemoteControlWithUndo() {
+        onCommands = new Command[commandCount];
+        offCommands = new Command[commandCount];
+
+        Command noCommand = new NoCommand();
+        for (int i = 0; i< commandCount; i++) {
+            onCommands[i] = noCommand;
+            offCommands[i] = noCommand;
+        }
+        undoCommand = noCommand;
+    }
+
+    public void setCommand(int index, Command onCommand, Command offCommand) {
+        onCommands[index] = onCommand;
+        offCommands[index] = offCommand;
+    }
+
+    public void onBtnClick(int index) {
+        onCommands[index].execute();
+        undoCommand = onCommands[index];
+    }
+
+    public void offBtnClick(int index) {
+        offCommands[index].execute();
+        undoCommand = offCommands[index];
+    }
+
+    public void undoBtnClick() {
+        undoCommand.undo();
+    }
+}
+```
+
+宏命令：初始化时传入多组命令，当执行宏命令时，就会一次性执行所传入的所有命令。  
+```csharp
+public class MacroCommand : Command {
+    Command[] commands;
+
+    public MacroCommand(Command[] commands) {
+        this.commands = commands;
+    }
+
+    public void execute() {
+        for (int i = 0; i < commands.length; i++) {
+            commands[i].execute();
+        }
+    }
+}
+```
+
+应用场景：  
+  * 工作队列：在某一端添加命令，然后在另一端（可以是另一个线程）中弹出一个命令，进行调用（execute）。
+  * 日志记录：将所有动作命令都记录在日志中，并能在系统死机之后，重新加载这些动作，通过依次调用动作的execute()方法，恢复到出错的状态，从而快速查找到问题。为了减少日志的记录量，可以定义一些检查点，只将上次检查点之后的所有操作记录下来。

@@ -5,6 +5,11 @@
 -----
 * [编程知识](coding/README.md)
     * [编程语言特性](coding/coding_language_feature/README.md)
+        * [CSharp](coding/coding_language_feature/csharp.md)
+        * [Go](coding/coding_language_feature/golang.md)
+        * [Lua](coding/coding_language_feature/lua.md)
+        * [Python](coding/coding_language_feature/python.md)
+        * [JavaScript](coding/coding_language_feature/javascript.md)
     * [算法复杂度](coding/algorithm_complexity.md)
     * [编程笔记](coding/coding_notes.md)
     * [编程风格](coding/coding_style.md)
