@@ -91,8 +91,9 @@ AssetBundle进行内存释放的方式：
   * Awake -> OnEnable -> Start -> Update -> FixedUpdate -> LateUpdate -> OnGUI -> OnDisable -> OnDestroy
 
 ## 16. 物理更新一般放在FixedUpdate函数中
-  * FixedUpdate，每固定帧绘制时执行一次，和Update不同的是FixedUpdate是渲染帧执行，若渲染效率低下的时候，FixedUpdate调用次数就会跟着下降。
-  * FixedUpdate比较适用于物理引擎的计算，因为是跟每帧渲染有关。Update比较适合做控制。
+  * FixedUpdate，是在固定的时间间隔运行，不受游戏帧率的影响。
+  * 处理Rigidbody时，需要用FixedUpdate代替Update。因为FixedUpdate是以固定的时间间隔来被调用，所以人物运动起来比较平滑。
+  * FixedUpdate的时间间隔可以在项目设置中更改，点击`Edit - Project Setting - time`找到`Fixed timestep`，即可更改。
 
 ## 17. LOD(Level of detail)
   * 多层次细节，是最常用的游戏优化技术。
@@ -102,15 +103,15 @@ AssetBundle进行内存释放的方式：
   * MinMapping：在三维计算机图形的贴图渲染中有常用的技术，为加快渲染进度和减少图像锯齿，贴图被处理成有一系列被预先计算和优化过的图片组成的文件，这样的贴图被称为MipMap。
 
 ## 19. 向量的点乘、叉乘及归一化的意义
-  * 点乘描述了两个向量的相似程度，结果越大两向量月相似，还能用于表示投影；
+  * 点乘描述了两个向量的相似程度，结果越大两向量越相似，还能用于表示投影；
   * 叉乘得到的向量垂直于原来的两个向量；
-  * 标准化向量：用在之关系方向，不关心大小的时候。
+  * 标准化向量：用在只关系方向，不关心大小的时候。
 
 ## 20. 在移动设备上寻求U3D原生GUI的替代方案的原因
   * 不美观，且OnGUI费时、效率不高，且使用不便。
 
 ## 21. LightMap
-  * LightMap：指在三维软件里实现打好光，然后渲染吧场景各表面的光照输出到贴图上，最后又通过引擎贴到场景上，从而使得物体有光照感。
+  * LightMap：指在三维软件里实现好打光，然后渲染把场景各表面的光照输出到贴图上，最后又通过引擎贴到场景上，从而使得物体有光照感。
 
 ## 22. ref和out参数
   * ref和out参数的效果一样，都是通过关键字找到定义在主函数里的变量的内存地址，并通过方法体内的语法改变其大小。
@@ -121,7 +122,7 @@ AssetBundle进行内存释放的方式：
 
 ## 24. GC原因及避免方法
   * 原因：堆上产生垃圾；
-  * 避免方法：A. 减少new产生对象的次数；B. 使用公用的对象（静态成员）；C. 将String换位StringBuilder。
+  * 避免方法：A. 减少new产生对象的次数；B. 使用公用的对象（静态成员）；C. 将String换为StringBuilder。
 
 ## 25. 反射的实现原理
 在运行时根据程序集及其中的类型得到元数据。  
@@ -160,11 +161,11 @@ AssetBundle进行内存释放的方式：
   * animator的初始化很耗时；
   * 除主角外都不要跟骨骼运动`apply root motion`；
   * 禁止掉不带刚体待包围盒的物体（`static collider`）运动；
-  * 每帧递归的计算fanalalpha改为只有初始化和变动时计算；
+  * 每帧递归的计算finalalpha改为只有初始化和变动时计算；
   * 去掉法线计算；
   * 不要每帧计算viewsize和windowssize；
   * filldrawcall时构建顶点缓存使用array.copy；
-  * 尽量减少`smooth grop`
+  * 尽量减少`smooth group`
 
 ## 30. Camera组件的ClearFlags选项
   * 当勾选为Deapth Only，那么摄像机只会渲染看得见的对象，将背景完全透明。这种情况一般用于两个摄像机以上的场景。
@@ -243,3 +244,8 @@ U3D的图像特效都在OnRenderImage()函数中，在图像到达颜色缓存�
   * 可视化编程：`PlayMaker`
   * 插值插件：`iTween`、`HOTween`
   * 路径搜寻：`Simple Path`
+
+## 41. 垃圾收集器
+  * 垃圾收集器对于游戏是很糟的。因为无法预知它们的运行时间，并且可能运行很长时间，使得画面的帧率降低。
+  * 因此，游戏程序中需要禁用垃圾收集器，而这个做起来简单，随后在每个游戏关卡后显式地调用它。
+  * 垃圾收集器同时也能告诉你有多少无法访问到达的对象仍然在分配中，这个可以帮助你跟踪循环引用的情况，之后可以手工地解决它们，相当于Python的内存泄露检查。
