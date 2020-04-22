@@ -10,4 +10,5 @@
   * [实时光线追踪技术](realtime_ray_tracing_technology/README.md)
   * [著名游戏引擎与其代表作](mainstream_game_engine/README.md)
   * [游戏界传奇](gaming_legend/README.md)
+  * [游戏相关概念](game_concept/README.md)
   * [Shader特效](shader_effects/README.md)

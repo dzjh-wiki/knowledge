@@ -69,6 +69,8 @@
     * [著名游戏引擎与其代表作](game/mainstream_game_engine/README.md)
     * [游戏界传奇](game/gaming_legend/README.md)
         * [id Software诞生史](game/gaming_legend/games_of_id_software.md)
+    * [游戏相关概念](game/game_concept/README.md)
+        * [从帧概念到动态模糊](game/game_concept/frame.md)
     * [Shader特效](game/shader_effects/README.md)
         * [扫光特效](game/shader_effects/flow_light.md)
         * [描边特效](game/shader_effects/rim_lighting.md)
