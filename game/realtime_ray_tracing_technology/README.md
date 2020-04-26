@@ -71,7 +71,7 @@ Unity Ray Tracing的Key Feature可以总结为：
 ![图1](img/reflection_pipeline.png)  
 
 根据上图，可以将混合光线追踪反射管线的渲染步骤总结为如下六步：  
-  * **Step 1**：通过BRDF重要性采样生成光线，以提供符合材质特性的光线。。
+  * **Step 1**：通过BRDF重要性采样生成光线，以提供符合材质特性的光线。
   * **Step 2**：通过屏幕空间光线步进（screen-space raymarching）或光线追踪（ray tracing）来完成场景相交运算。
   * **Step 3**：在相交运算找到交点（intersections）之后，便可以重建反射图像。该过程可以就地完成，也可以分别完成，以提高一致性（coherency）。
   * **Step 4**：内核跨像素重用ray hit信息，将图像采样到全分辨率。
