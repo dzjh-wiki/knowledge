@@ -155,7 +155,7 @@ abstract Product factoryMethod(string type) // 实例化对象的抽象方法
 
 
 ## 5. 单件模式（Singleton Pattern）
-**单件模式**确保一个类置邮一个实例，并提供一个全局访问点。
+**单件模式**确保一个类只有一个实例，并提供一个全局访问点。
 ```csharp
 public class Singleton {
     private static Singleton instance = new Singleton();
@@ -168,7 +168,7 @@ public class Singleton {
 注意：多线程的处理问题（加锁？）。
 
 
-## 5. 命令模式
+## 6. 命令模式
 **命令模式**将“请求”封装成对象，以便使用不同的请求、队列或者日志来参数化其他对象。命令模式也支持可撤销的操作。  
 ```csharp
 public interface Command {
