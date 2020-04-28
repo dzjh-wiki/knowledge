@@ -24,7 +24,7 @@
   * 多线程不一定比单线程快，尤其是在进行I/O操作的时候，因为浪费了多线程切换的时间。多线程只是为了充分利用空闲的CPU，提高计算效率。
 
 ## 6. 能用foreach遍历访问的对象需实现的方法
-  * 需实现IEnumerable接口和GetEnumerate()方法。
+  * 需实现IEnumerable接口和GetEnumerator()方法。
 
 ## 7. Heap和Stack的差别
   * Heap是堆，空间是由手动操作分配和释放的，其内存储区是很大的自由存储区。

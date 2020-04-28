@@ -1,6 +1,10 @@
 # 扫光特效
 
 ----
+实现步骤：  
+  * 在顶点着色器中，将扫光贴图的UV根据速度和当前已花的时间进行偏移；
+  * 在片元着色器中，根据扫光贴图、UV偏移值、扫光颜色和大小，获取扫光采样，将采样结果与原图进行混合得到扫光结果，最后将扫光结果添加到原图上。
+
 ```csharp
 Shader "BanMing/UIFlowLight"
 {
@@ -77,8 +81,8 @@ Shader "BanMing/UIFlowLight"
 
 				// FlowLight
 				OUT.texFlowLight=TRANSFORM_TEX(IN.texcoord,_FLowLightTex);
-				OUT.texFlowLight.x+=_Time * _SpeedX;
-				OUT.texFlowLight.y+=_Time * _SpeedY;
+				OUT.texFlowLight.x+=_Time.y * _SpeedX;
+				OUT.texFlowLight.y+=_Time.y * _SpeedY;
 
 				OUT.color = IN.color;
 				#ifdef PixelSnap_ON
