@@ -15,3 +15,7 @@ _Time float4 Time (t/20, t, t*2, t*3) // 每次切完场景会重新变化计数
   * [2D水体效果](water_effect_2d.md)
   * [圆角特效](fillet_effect.md)
   * [波纹效果](ripple_effect.md)
+  * [溶解效果](ablation_effect.md)
+  * [消失效果](dissolve_effect.md)
+  * [屏幕收缩效果](screen_shrink_effect.md)
+  * [热空气扭曲效果](hot_air_twist.md)
