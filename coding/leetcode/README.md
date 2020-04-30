@@ -22,6 +22,10 @@
   * [通配符匹配](#通配符匹配)
   * [跳跃游戏II](#跳跃游戏II)
   * [二叉树中的最大路径和](#二叉树中的最大路径和)
+  * [格雷编码](#格雷编码)
+  * [LRU缓存机制](#LRU缓存机制)
+  * [二叉搜索树中第K小的元素](#二叉搜索树中第K小的元素)
+  * [除自身以外数组的乘积](#除自身以外数组的乘积)
 
 ## 三数之和
 ```csharp
@@ -1047,4 +1051,232 @@ int helper(TreeNode root) {
     else
         return root.val+m;
 }
+```
+
+
+## 格雷编码
+```csharp
+// 格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。
+
+// 给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。即使有多个不同答案，你也只需要返回其中一种。
+
+// 格雷编码序列必须以 0 开头。
+
+//  
+
+// 示例 1:
+
+// 输入: 2
+// 输出: [0,1,3,2]
+// 解释:
+// 00 - 0
+// 01 - 1
+// 11 - 3
+// 10 - 2
+
+// 对于给定的 n，其格雷编码序列并不唯一。
+// 例如，[0,2,3,1] 也是一个有效的格雷编码序列。
+
+// 00 - 0
+// 10 - 2
+// 11 - 3
+// 01 - 1
+// 示例 2:
+
+// 输入: 0
+// 输出: [0]
+// 解释: 我们定义格雷编码序列必须以 0 开头。
+//      给定编码总位数为 n 的格雷编码序列，其长度为 2n。当 n = 0 时，长度为 20 = 1。
+//      因此，当 n = 0 时，其格雷编码序列为 [0]。
+```
+![格雷编码](img/gray_code.png)
+```py
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        res, head = [0], 1
+        for i in range(n):
+            for j in range(len(res) - 1, -1, -1):
+                res.append(head + res[j])
+            head <<= 1
+        return res
+```
+
+最重要的是，要进行归纳汇总！
+规律：  
+  * n = 0, [0]
+  * n = 1, [0,1] //新的元素1，为0+2^0
+  * n = 2, [0,1,3,2] // 新的元素[3,2]为[0,1]->[1,0]后分别加上2^1
+  * n = 3, [0,1,3,2,6,7,5,4] // 新的元素[6,7,5,4]为[0,1,3,2]->[2,3,1,0]后分别加上2^2->[6,7,5,4]
+
+```csharp
+class Solution {
+    public vector<int> grayCode(int n) {
+        int shift = 1;
+        vector<int> res;
+        while(n >= 0){
+            if(res.size() == 0){
+                res.push_back(0);
+            }else{
+                for(int i = shift-1; i >= 0; --i){
+                    res.push_back(res[i] + shift);
+                }
+                shift *= 2;
+            }
+            --n;
+        }
+        return res;
+    }
+}
+```
+
+
+## LRU缓存机制
+```csharp
+// 运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
+
+// 获取数据 get(key) - 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。
+// 写入数据 put(key, value) - 如果密钥已经存在，则变更其数据值；如果密钥不存在，则插入该组「密钥/数据值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。
+
+//  
+
+// 进阶:
+
+// 你是否可以在 O(1) 时间复杂度内完成这两种操作？
+
+//  
+
+// 示例:
+
+// LRUCache cache = new LRUCache( 2 /* 缓存容量 */ );
+
+// cache.put(1, 1);
+// cache.put(2, 2);
+// cache.get(1);       // 返回  1
+// cache.put(3, 3);    // 该操作会使得密钥 2 作废
+// cache.get(2);       // 返回 -1 (未找到)
+// cache.put(4, 4);    // 该操作会使得密钥 1 作废
+// cache.get(1);       // 返回 -1 (未找到)
+// cache.get(3);       // 返回  3
+// cache.get(4);       // 返回  4
+```
+首先实现一个可以存储 key-value 形式数据的数据结构，并且可以记录最近访问的 key 值。首先想到的就是用字典来存储 key-value 结构，这样对于查找操作时间复杂度就是 O(1)。  
+
+但是因为字典本身是无序的，所以我们还需要一个类似于队列的结构来记录访问的先后顺序，这个队列需要支持如下几种操作：  
+  * 在末尾加入一项
+  * 去除最前端一项
+  * 将队列中某一项移到末尾
+  * 首先考虑列表结构
+
+
+## 二叉搜索树中第K小的元素
+```csharp
+// 给定一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。
+
+// 说明：
+// 你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。
+
+// 示例 1:
+
+// 输入: root = [3,1,4,null,2], k = 1
+//    3
+//   / \
+//  1   4
+//   \
+//    2
+// 输出: 1
+// 示例 2:
+
+// 输入: root = [5,3,6,2,4,null,null,1], k = 3
+//        5
+//       / \
+//      3   6
+//     / \
+//    2   4
+//   /
+//  1
+// 输出: 3
+// 进阶：
+// 如果二叉搜索树经常被修改（插入/删除操作）并且你需要频繁地查找第 k 小的值，你将如何优化 kthSmallest 函数？
+```
+**遍历树：**  
+
+  * 深度优先搜索（DFS）
+
+在这个策略中，我们从根延伸到某一片叶子，然后再返回另一个分支。根据根节点，左节点，右节点的相对顺序，DFS 还可以分为前序，中序，后序。
+
+  * 广度优先搜索（BFS）
+
+在这个策略中，我们逐层，从上到下扫描整个树。
+
+
+下图展示了不同的遍历策略：
+![不同的遍历策略](img/binary_tree_traversal.jpg)
+
+为了解决这个问题，可以使用 BST 的特性：BST 的中序遍历是升序序列。
+
+**递归**  
+通过构造 BST 的中序遍历序列，则第 k-1 个元素就是第 k 小的元素。  
+![](img/binary_tree_traversal_recursive.jpg)  
+```java
+class Solution {
+  public ArrayList<Integer> inorder(TreeNode root, ArrayList<Integer> arr) {
+    if (root == null) return arr;
+    inorder(root.left, arr);
+    arr.add(root.val);
+    inorder(root.right, arr);
+    return arr;
+  }
+
+  public int kthSmallest(TreeNode root, int k) {
+    ArrayList<Integer> nums = inorder(root, new ArrayList<Integer>());
+    return nums.get(k - 1);
+  }
+}
+```
+复杂度分析  
+  * 时间复杂度：O(N)O(N)，遍历了整个树。
+  * 空间复杂度：O(N)O(N)，用了一个数组存储中序序列。
+
+**迭代**  
+在栈的帮助下，可以将方法一的递归转换为迭代，这样可以加快速度，因为这样可以不用遍历整个树，可以在找到答案后停止。  
+![](img/binary_tree_traversal_iterate.jpg)  
+```java
+class Solution {
+  public int kthSmallest(TreeNode root, int k) {
+    LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+
+    while (true) {
+      while (root != null) {
+        stack.add(root);
+        root = root.left;
+      }
+      root = stack.removeLast();
+      if (--k == 0) return root.val;
+      root = root.right;
+    }
+  }
+}
+```
+复杂度分析  
+![](img/binary_tree_traversal_iterate_o.png)  
+
+
+## 除自身以外数组的乘积
+```csharp
+// 给你一个长度为 n 的整数数组 nums，其中 n > 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。
+
+//  
+
+// 示例:
+
+// 输入: [1,2,3,4]
+// 输出: [24,12,8,6]
+//  
+
+// 提示：题目数据保证数组之中任意元素的全部前缀元素和后缀（甚至是整个数组）的乘积都在 32 位整数范围内。
+
+// 说明: 请不要使用除法，且在 O(n) 时间复杂度内完成此题。
+
+// 进阶：
+// 你可以在常数空间复杂度内完成这个题目吗？（ 出于对空间复杂度分析的目的，输出数组不被视为额外空间。）
 ```

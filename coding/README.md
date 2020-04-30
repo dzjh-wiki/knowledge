@@ -23,6 +23,7 @@
     * [HTTP和HTTPS](communication/http_and_https.md)
     * [WebSocket](communication/websocket.md)
     * [RPC](communication/rpc.md)
+    * [QUIC](communication/quic.md)
   * [领域驱动设计（DDD）](domain_driven_design/README.md)
     * [统一建模语言（UML）](domain_driven_design/uml.md)
     * [事件溯源（Event Sourcing）](domain_driven_design/event_sourcing.md)
