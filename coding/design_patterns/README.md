@@ -9,6 +9,9 @@
   * [7.适配器模式](#7-适配器模式)
   * [8.模板方法模式](#8-模板方法模式)
   * [9.迭代器与组合模式](#9-迭代器与组合模式)
+  * [10.状态模式](#10-状态模式)
+  * [11.代理模式](#11-代理模式)
+  * [12.其他模式](#12-其他模式)
 
 ----
 
@@ -434,3 +437,121 @@ public class CompositeIterator : Iterator {
   * 迭代器 -> 提供一个方式来遍历集合，而无须暴露集合的实现
   * 组合 -> 客户可以将对象的集合以及个别的对象一视同仁
   * 观察者 -> 当某个状态改变时，允许一群对象能被通知到
+
+
+## 10. 状态模式
+**状态模式**允许对象在内部状态改变时改变它的行为，对象看起来好像修改了它的类。
+```csharp
+public interface IState {
+    void handle(); // 所有具体状态的共同接口
+}
+
+public class ConcreteStateA : IState {
+    public void handle() {
+        // 实现行为
+    }
+}
+
+public class ConcreteStateB : IState {
+    public void handle() {
+        // 实现行为
+    }
+}
+
+// 状态常量
+public enum State {
+    A, B,
+}
+
+public class Context {
+    IState stateA;
+    IState stateB;
+
+    IState state = stateA; // 默认状态A
+
+    // 允许切换状态
+    public void SetState(State state) {
+        switch(state) {
+            case State.A:
+                this.state = stateA;
+                break;
+            case State.B:
+                this.state = stateB;
+                break;
+            default:
+                System.out.println("Invalid state !");
+                break;
+        }
+    }
+
+    public void request() {
+        state.handle();
+    }
+}
+```
+
+**模式描述**  
+  * 状态 -> 封装基于状态的行为，并将行为委托到当前状态
+  * 策略 -> 将可以互换的行为封装起来，然后使用委托的方法，决定使用哪一个行为
+  * 模板方法 -> 由子类决定如何实现算法中的某些步骤
+
+
+## 11. 代理模式
+**代理模式**为另一个对象提供一个替身或占位符以控制对这个对象的访问。  
+
+**使用代理模式创建代表对象，让代表对象控制某对象的访问，被代理的对象可以是远程的对象、创建开销大的对象或需要安全控制的对象。**  
+
+```csharp
+public interface Subject {
+    void request();
+}
+
+public class RealSubject {
+    public void request() {
+        // 实现行为
+    }
+}
+
+public class Proxy : Subject {
+    RealSubject subject;
+
+    public void request() {
+        // 执行其他逻辑
+        // ...
+
+        // 调用所控制的对象
+        subject.request();
+    }
+}
+```
+
+**代理模式**由许多变体，例如：缓存代理、同步代理、防火墙代理和写入时复制代理。  
+
+
+## 12. 其他模式
+### 桥接
+在改变实现的同时，也改变抽象。
+
+### 生成器
+封装一个产品的构造过程，并允许按步骤构造。
+
+### 责任链
+让一个以上的对象有机会能够处理某个请求。
+
+### 蝇量
+让某个类的一个实例能用来提供许多“虚拟实例”。
+
+### 解释器
+为语言创建解释器。
+
+### 中介者
+集中相关对象之间复杂的沟通和控制方式。
+
+### 备忘录
+让对象返回之前的状态（如，撤销）。
+
+### 原型
+适用于创建给定类的实例的过程很昂贵或很复杂的情况。
+
+### 访问者
+为一个对象的组合增加新的能力，且封装并不重要。
