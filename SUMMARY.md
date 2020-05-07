@@ -23,6 +23,7 @@
         * [HTTP和HTTPS](coding/communication/http_and_https.md)
         * [WebSocket](coding/communication/websocket.md)
         * [RPC](coding/communication/rpc.md)
+        * [QUIC](coding/communication/quic.md)
     * [领域驱动设计（DDD）](coding/domain_driven_design/README.md)
         * [统一建模语言（UML）](coding/domain_driven_design/uml.md)
         * [事件溯源（Event Sourcing）](coding/domain_driven_design/event_sourcing.md)
@@ -31,6 +32,7 @@
     * [设计模式](coding/design_patterns/README.md)
     * [LeetCode题解合集](coding/leetcode/README.md)
     * [模式匹配算法](coding/pattern_matching_algorithm/README.md)
+    * [寻路算法](coding/pathfinding_algorithm/README.md)
 
 -----
 * [数学知识](math/README.md)

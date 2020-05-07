@@ -137,6 +137,8 @@ Floyd算法是解决任意两点间的最短路径的一种算法，可以正确
 **重复以上步骤...**  
 
 ## SPFA算法
+最短路径快速算法【Shortest Path Faster Algorithm】  
+
 参考文章：[SPFA算法](https://blog.csdn.net/qq_35644234/article/details/61614581)
 
 ### 特点
