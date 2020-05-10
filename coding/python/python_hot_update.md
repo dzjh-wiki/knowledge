@@ -8,7 +8,7 @@ import导入一个模块分两步：
 
 其中第一步有以下的搜寻过程：`sys.modules` -> `sys.meta_path` -> `sys.path_hooks, sys.path_importer_cache, sys.path`  
 
-**reload**  
+## reload
 math从缓存sys.modules移除后，__import__会重新load math并添加到sys.modules，导致当前环境中math绑定的math module和sys.modules中不一致，导致reload失败。  
 ```py
 import sys, math
