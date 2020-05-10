@@ -24,7 +24,7 @@
 | `__mod__(self, other)` | `self%other` | 取余（算数操作符） |
 | `__pow__(self, other)` | `self**other` | 幂运算（算数操作符） |
 | `__and__(self, other)` | `self&other` | 与运算（算数操作符） |
-| `__or__(self, other)` | `self\|other` |或幂运算（算数操作符） |
+| `__or__(self, other)` | `self|other` |或幂运算（算数操作符） |
 | `__iadd__(self, other)` | `self+=other` | 赋值操作符 |
 | `__isub__(self, other)` | `self-=other` | 赋值操作符 |
 | `__imul__(self, other)` | `self*=other` | 赋值操作符 |
