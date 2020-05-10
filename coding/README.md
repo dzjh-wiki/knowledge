@@ -33,3 +33,4 @@
   * [LeetCode题解合集](leetcode/README.md)
   * [模式匹配算法](pattern_matching_algorithm/README.md)
   * [寻路算法](pathfinding_algorithm/README.md)
+  * [排序算法](sort_algorithm/README.md)

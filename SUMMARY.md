@@ -17,6 +17,12 @@
         * [Python编程技巧](coding/python/Python_Coding_Skills.md)
         * [Python3特性](coding/python/python3_feature.md)
         * [pythonic方式](coding/python/pythonic_skills.md)
+        * [python的id函数](coding/python/python_id_func.md)
+        * [python的魔法方法](coding/python/python_magic_func.md)
+        * [python的内存管理](coding/python/python_memory_management.md)
+        * [Python GIL](coding/python/python_gil.md)
+        * [python程序执行原理](coding/python/python_program_exe.md)
+        * [python的热更新](coding/python/python_hot_update.md)
     * [从输入Url到页面渲染](coding/urlrender/README.md)
     * [网络通信](coding/communication/README.md)
         * [HTTP、TCP和Socket](coding/communication/http_and_tcp_and_socket.md)
@@ -33,6 +39,7 @@
     * [LeetCode题解合集](coding/leetcode/README.md)
     * [模式匹配算法](coding/pattern_matching_algorithm/README.md)
     * [寻路算法](coding/pathfinding_algorithm/README.md)
+    * [排序算法](coding/sort_algorithm/README.md)
 
 -----
 * [数学知识](math/README.md)
