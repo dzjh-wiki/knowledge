@@ -12,3 +12,4 @@ python相关内容：
   * [Python GIL](python_gil.md)
   * [python程序执行原理](python_program_exe.md)
   * [python的热更新](python_hot_update.md)
+  * [python的生成器和迭代器](python_generators_and_iterators.md)

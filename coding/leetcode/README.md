@@ -92,7 +92,7 @@ Github链接：[https://github.com/JDreamHeart/DailyCodes/csharp/LeetCode/Soluti
 
 
 动态规划法：  
-table[0,0]=true表示s与p是匹配的，而且在table种我们可以得到一条通路from右下角to左上角（忽略2个星列），这条通路的走向有3种：
+table[0,0]=true表示s与p是匹配的，而且在table中我们可以得到一条通路from右下角to左上角（忽略2个星列），这条通路的走向有3种：
   * 1) 格星左跳一位，例如table[4,6]到table[4,4],  【A】
   * 2) 向上走一位，例如tble[3,1]到table[2,1], 【B】
   * 3) 向左上走一位，例如 table[1,1]到 table[0,0] , 【C】

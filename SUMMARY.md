@@ -23,6 +23,7 @@
         * [Python GIL](coding/python/python_gil.md)
         * [python程序执行原理](coding/python/python_program_exe.md)
         * [python的热更新](coding/python/python_hot_update.md)
+        * [python的生成器和迭代器](coding/python/python_generators_and_iterators.md)
     * [从输入Url到页面渲染](coding/urlrender/README.md)
     * [网络通信](coding/communication/README.md)
         * [HTTP、TCP和Socket](coding/communication/http_and_tcp_and_socket.md)

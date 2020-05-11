@@ -24,7 +24,7 @@
 | `__mod__(self, other)` | `self%other` | 取余（算数操作符） |
 | `__pow__(self, other)` | `self**other` | 幂运算（算数操作符） |
 | `__and__(self, other)` | `self&other` | 与运算（算数操作符） |
-| `__or__(self, other)` | `self|other` |或幂运算（算数操作符） |
+| `__or__(self, other)` | `self|other` | 或运算（算数操作符） |
 | `__iadd__(self, other)` | `self+=other` | 赋值操作符 |
 | `__isub__(self, other)` | `self-=other` | 赋值操作符 |
 | `__imul__(self, other)` | `self*=other` | 赋值操作符 |
@@ -32,11 +32,7 @@
 | `__itruediv__(self, other)` | `self/=other` | 赋值操作符 |
 | `__imod__(self, other)` | `self%=other` | 赋值操作符 |
 | `__str__(self)` | `str(self)` |  |
-
 | `__len__(self)` | `len(self)` |  |
-| `__str__(self)` | `str(self)` |  |
-| `__str__(self)` | `str(self)` |  |
-| `__str__(self)` | `str(self)` |  |
 
 
 ## `__init__`和`__new__`
@@ -68,7 +64,7 @@ class Singleton(object):
 
 **`__setattr__(self, name, value)`**  
   * `__setattr__ `是实现封装的解决方案，它定义了你对属性进行赋值和修改操作时的行为。
-  * 不管对象的某个属性是否存在,它都允许你为该属性进行赋值,因此你可以为属性的值进行自定义操作。有一点需要注意，实现`__setattr__`时要避免"无限递归"的错误，下面的代码示例中会提到。
+  * 不管对象的某个属性是否存在,它都允许你为该属性进行赋值,因此你可以为属性的值进行自定义操作。有一点需要注意，实现`__setattr__`时要避免"无限递归"的错误。
 
 **`__delattr__(self, name)`**  
   * `__delattr__`与`__setattr__`很像，只是它定义的是你删除属性时的行为。实现`__delattr__`是同时要避免"无限递归"的错误。
@@ -77,6 +73,36 @@ class Singleton(object):
   * `__getattribute__`定义了你的属性被访问时的行为，相比较，`__getattr__`只有该属性不存在时才会起作用。
   * 因此，在支持`__getattribute__`的Python版本,调用`__getattr__`前必定会调用 `__getattribute__`。`__getattribute__`同样要避免"无限递归"的错误。
 
+```py
+class Foo(object):
+    def __init__(self, value):
+        self.value = value
+
+    def __getattr__(self, item):
+        if item == 'scolia':
+            return 'no attr:%s' % item
+        elif item in self.__dict__:
+            return self.__dict__[item]
+        else:
+            raise AttributeError('no attr:%s' % item)
+
+    def __setattr__(self, key, value):
+        if key == 'good':
+            print 'can not set the attr: good'
+        else:
+            self.__dict__[key] = value
+
+    def __delattr__(self, item):
+        if item == 'a':
+            print 'no attr: good'
+        else:
+            del self.__dict__[item]
+
+    def __getattribute__(self, item):
+        if item == 'a':
+            raise AttributeError('not a')
+        return object.__getattribute__(self, item)
+```
 
 ## 描述器
 参考[Python 描述器](../coding_language_feature/python.md#描述器)
