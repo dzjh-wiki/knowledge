@@ -62,7 +62,8 @@ int kmp(string s, string p) {
 int[] getNext(string s) {
     int i = 0, j = -1;
     int[] next = new int[s.Length];
-    while (i < s.Length) {
+    next[0] = -1;
+    while (i < s.Length - 1) {
         if (j == -1 || s[i] == s[j]) {
             i++;
             j++;
@@ -85,8 +86,9 @@ int kmp(string s, string p) {
             if (s[i] != p[j]) {
                 if (j == 0) {
                     i++;
+                } else {
+                    j = next[j];
                 }
-                j = next[j > 0 ? j - 1 : 0];
                 break;
             } else if (j == p.Length - 1) {
                 return i - j;
