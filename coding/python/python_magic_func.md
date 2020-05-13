@@ -105,12 +105,11 @@ class Foo(object):
 ```
 
 ## 描述器
-参考[Python 描述器](../coding_language_feature/python.md#描述器)
 
 一个类要成为描述器，必须实现`__get__`, `__set__`, `__delete__`中的至少一个方法。下面简单介绍下:
 
 **`__get__(self, instance, owner)`**  
-  * 参数instance是拥有者类的实例。参数owner是拥有者类本身。`__get__`在其拥有者对其读值的时候调用。
+  * 参数instance是拥有者类（指调用该描述器的类）的实例。参数owner是拥有者类本身。`__get__`在其拥有者对其读值的时候调用。
 
 **`__set__(self, instance, value)`**  
   * `__set__`在其拥有者对其进行修改值的时候调用。
