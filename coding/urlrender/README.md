@@ -257,8 +257,15 @@ JS 有三种运行环境：
 **代码例子**
 ```js
 console.log('1'); // 宏任务 同步
-setTimeout(function() { console.log('2'); // 宏任务 异步})
-new Promise(function(resolve) { console.log('3'); // 宏任务 同步 resolve();}).then(function() { console.log('4') // 微任务})
+setTimeout(function() {
+  console.log('2'); // 宏任务 异步
+})
+new Promise(function(resolve) {
+  console.log('3'); // 宏任务 同步
+  resolve();
+}).then(function() {
+  console.log('4') // 微任务
+})
 console.log('5') // 宏任务 同步
 // 以上代码输出顺序为：1,3,5,4,2
 ```
