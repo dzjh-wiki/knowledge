@@ -13,3 +13,6 @@ python相关内容：
   * [python程序执行原理](python_program_exe.md)
   * [python的热更新](python_hot_update.md)
   * [python的生成器和迭代器](python_generators_and_iterators.md)
+  * [python内存优化技巧](python_memory_optimization_techniques.md)
+  * [python元类](python_metaclass.md)
+  * [python单例模式](python_singleton_pattern.md)

@@ -8,6 +8,8 @@
 主要内容：
 
   * [从输入Url到页面渲染](urlrender/README.md)
+  * [python语言](python/README.md)
+  * [javascript语言](javascript/README.md)
   * [编程语言特性](coding_language_feature/README.md)
     * [CSharp](coding_language_feature/csharp.md)
     * [Go](coding_language_feature/golang.md)
@@ -17,8 +19,6 @@
   * [算法复杂度](algorithm_complexity.md)
   * [编程笔记](coding_notes.md)
   * [编程风格](coding_style.md)
-  * [python语言](python/README.md)
-  * [javascript语言](javascript/README.md)
   * [网络通信](communication/README.md)
     * [HTTP、TCP和Socket](communication/http_and_tcp_and_socket.md)
     * [HTTP和HTTPS](communication/http_and_https.md)

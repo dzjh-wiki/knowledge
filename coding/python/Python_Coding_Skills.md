@@ -59,7 +59,7 @@ if key in my_dict:
 navs = {}
 for (portfolio, equity, position) in data:
     if portfolio not in navs:
-            navs[portfolio] = 0
+        navs[portfolio] = 0
     navs[portfolio] += position * prices[equity]
 
 # 推荐

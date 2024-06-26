@@ -47,9 +47,10 @@ function Son() {
 }
 var instance1 = new Son();
 instance1.nameList.push("Son");
-
+console.log(instance1.nameList); // ["Base", "Father", "Son"]
+		
 var instance2 = new Son();
-alert(instance2.nameList); // ["Base", "Father", "Son"]
+console.log(instance2.nameList); // ["Base", "Father"]
 ```
 
 ### new 运算符
