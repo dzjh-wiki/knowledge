@@ -5,7 +5,7 @@
 	"language" : "zh-hans",
 	"links" : {
 		"sidebar" : {
-			"Home" : "https://jdreamheart.com/wiki"
+			"Home" : "https://jdreamheart.com/web"
 		}
 	},
 	"plugins" : ["favicon", "expandable-chapters", "splitter", "github", "hide-element", "back-to-top-button", "mathjax"],
